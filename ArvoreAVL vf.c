@@ -1,10 +1,11 @@
 #include <stdio.h> 
 #include <stdLib.h>
 
+//Estrutura que representa os nós da árvore
 typedef struct no 
 {
     int chave;
-    int fb;
+    int fb; //fator de balanceamento
     struct no *esq;
     struct no *dir;
     
@@ -52,39 +53,44 @@ no *rotDir(no *raiz){
 no *bl(no *raiz){
 	if (raiz->fb == -2){
 		if (raiz->esq->fb == 1)
-			raiz->esq = rotDir(raiz->esq);
-		raiz = rotEsq(raiz);
+			raiz->esq = rotEsq(raiz->esq);
+		raiz = rotDir(raiz);
 	}
 	else{
 		if (raiz->fb == 2){
 			if (raiz->dir->fb == -1)
-				raiz->dir = rotEsq(raiz->dir);
+				raiz->dir = rotDir(raiz->dir);
 			raiz = rotEsq(raiz);
 		}
 	}
 	return raiz;
 }
 
+//insere um nó na árvore
 no *inserirNo(no *raiz, int valor){
 	no *novo = (no*)malloc(sizeof(no));
+	/*inicia os atributos do nó*/
 	if (!raiz){
 		novo->esq = NULL;
 		novo->dir = NULL;
 		novo->chave = valor;
-		novo->fb = 0;
+		novo->fb = 0; //o fator é zero pois ela não tem filhos
 		return novo;
 	}
 	else{
+		//verifica se o valor já existe
 		if (raiz->chave == valor){
 			printf("valor ja existe!\n");
 			return raiz;
 		}
+		//procura a posição mais apropriada para a inserção do nó
 		if (valor < raiz->chave){
 			raiz->esq = inserirNo(raiz->esq,valor);
 		}
 		else{
 			raiz->dir = inserirNo(raiz->dir,valor);
 		}
+		//atualiza o fator de balanceamento e balanceia a árvore
 		raiz->fb = fb(raiz);
 		raiz = bl(raiz);
 		return raiz;
