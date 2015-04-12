@@ -123,6 +123,7 @@ no *remover(no *raiz, int valor){
         raiz->esq = remover(raiz->esq,valor);
     }
     raiz -> fb = fb(raiz);
+    raiz = bl(raiz);
     return raiz;
 }
 
