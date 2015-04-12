@@ -30,7 +30,7 @@ int alt(no *raiz){
 }
 
 int fb(no *raiz){
-	return (alt(raiz->dir) - alt(raiz->dir));
+	return (alt(raiz->dir) - alt(raiz->esq));
 }
 
 no *rotEsq(no *raiz){
