@@ -21,21 +21,41 @@ void construirHeapMax(heap *h);
 void imprimir(heap h);
 void heapSort(heap *h);
 bool inserirHeap(heap *h, int chave);
+int extrairMaxHeap(heap *h);
+int menu();
 
 int main(){
 	heap h;
+	int m,opc,valor;
 	iniciarHeap(&h,100);
-	inserirHeap(&h,9);
-	inserirHeap(&h,3);
-	inserirHeap(&h,1);
-	inserirHeap(&h,0);
-	inserirHeap(&h,7);
-	imprimir(h);
-	construirHeapMax(&h);
-	imprimir(h);
-	heapSort(&h);
-	imprimir(h);
-	getch();
+	
+	do{
+        opc = menu();
+        switch(opc){
+            case 1:
+                printf("Digite um valor:\n");
+                scanf("%d",&valor);
+                inserirHeap(&h,valor);
+                construirHeapMax(&h);
+                break;
+            case 2:
+                construirHeapMax(&h);
+                printf("Valor maximo da Heap:\n");
+                m = extrairMaxHeap(&h);
+                printf("->%d\n",m);
+                break;
+            case 3:
+                printf("Listagem dos elementos:\n");
+                construirHeapMax(&h);
+                imprimir(h);
+                break;
+            case 4:
+                printf("Listagem dos elementos apos o heapsort:\n");
+                heapSort(&h);
+                imprimir(h);
+                break;
+        }
+    }while(opc!=0);
 	return 0;
 }
 
@@ -43,13 +63,6 @@ void iniciarHeap(heap *h, int max){
 	h->a = (int*) malloc(sizeof(int)*(max+1));
 	h->tamAtual = 0;
 	h->tamMax = max;
-}
-
-void destruirHeap(heap *h){
-	int tam = h->tamMax;
-	free(h->a);
-	h->tamMax = 0;
-	h->tamAtual = 0;
 }
 
 int pai(int i){
@@ -99,7 +112,7 @@ void imprimir(heap h){
 	int tam = h.tamAtual;
 	int i;
 	for(i=1;i<=tam;i++){
-		printf("%d",h.a[i]);
+		printf("%d ",h.a[i]);
 	}
 	printf("\n");
 }
@@ -137,3 +150,28 @@ bool inserirHeap(heap *h, int chave){
 	return true;
 }
 
+//metodo e extrai e retorna o valor maximo da heap
+int extrairMaxHeap(heap *h){
+    if(h->tamAtual < 1){
+        return;
+    }
+    int max = h->a[1];
+    h->a[1] = h->a[h->tamAtual];
+    h->tamAtual = h->tamAtual-1;
+    maxHeapify(h,1);
+    return max;
+}
+
+int menu(){
+    int opcao;
+
+    printf("1.Inserir ...........:\n");
+    printf("2.Valor maximo.......:\n");
+    printf("3.Imprimir Max Heap..:\n");
+    printf("4.HeapSort e imprimir:\n");
+    printf("0.Sair do programa...:\n");
+    printf("?: ");
+
+    scanf("%d", &opcao);
+    return opcao;
+}
