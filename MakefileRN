@@ -1,0 +1,13 @@
+all:rn.exe
+
+rn.exe:mainrn.o rn.o
+	gcc rn.o mainrn.o -o rn.exe
+
+rn.o:rn.c
+	gcc -c rn.c -o rn.o
+
+mainrn.o:mainrn.c
+	gcc -c mainrn.c -o mainrn.o
+
+clean:
+	rm -f rn.exe *.o
