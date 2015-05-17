@@ -1,0 +1,13 @@
+all:hashendaberto.exe
+
+hashendaberto.exe:mainhashendaberto.o hashendaberto.o
+	gcc hashendaberto.o mainhashendaberto.o -o hashendaberto.exe
+
+hashendaberto.o:hashendaberto.c
+	gcc -c hashendaberto.c -o hashendaberto.o
+
+mainhashendaberto.o:mainhashendaberto.c
+	gcc -c mainhashendaberto.c -o mainhashendaberto.o
+
+clean:
+	rm -f hashendaberto.exe *.o
