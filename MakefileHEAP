@@ -1,0 +1,13 @@
+all:heap.exe
+
+heap.exe:mainheap.o heap.o
+	gcc heap.o mainheap.o -o heap.exe
+
+heap.o:heap.c
+	gcc -c heap.c -o heap.o
+
+mainheap.o:mainheap.c
+	gcc -c mainheap.c -o mainheap.o
+
+clean:
+	rm -f heap.exe *.o
