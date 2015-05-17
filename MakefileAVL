@@ -1,0 +1,11 @@
+all:avl.exe
+
+avl.exe:mainavl.o avl.o
+	gcc avl.o mainavl.o -o avl.exeavl.o:avl.c
+	gcc -c avl.c -o avl.o
+
+mainavl.o:mainavl.c
+	gcc -c mainavl.c -o mainavl.o
+
+clean:
+	rm -f avl.exe *.o
