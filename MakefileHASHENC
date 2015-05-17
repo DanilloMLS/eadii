@@ -1,0 +1,13 @@
+all:hashencadeado.exe
+
+hashencadeado.exe:mainhashencadeado.o hashencadeado.o
+	gcc hashencadeado.o mainhashencadeado.o -o hashencadeado.exe
+
+hashencadeado.o:hashencadeado.c
+	gcc -c hashencadeado.c -o hashencadeado.o
+
+mainhashencadeado.o:mainhashencadeado.c
+	gcc -c mainhashencadeado.c -o mainhashencadeado.o
+
+clean:
+	rm -f hashencadeado.exe *.o
