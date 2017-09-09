@@ -1,6 +1,7 @@
 #include "prim.h"
 
 int main(){
+	//Main
 	printf("Digite o numero de vertices:\n");
     do{
         scanf("%d",&tamanho);
