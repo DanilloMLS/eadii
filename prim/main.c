@@ -1,7 +1,7 @@
 #include "prim.h"
 
 int main(){
-	//Main
+	//Main para teste do algoritmo
 	printf("Digite o numero de vertices:\n");
     do{
         scanf("%d",&tamanho);
